@@ -1,23 +1,29 @@
 fn main() {
-    const FREEZING_POINT_C: i32 = 0; // signed 32 bit integer; -2,147,483,648 - 2,147,483,647
-    const FREEZING_POINT_AS_FLOAT_C: f32 = FREEZING_POINT_C as f32; // type conversion from i32 to f32
+    const FREEZING_POINT_C: f32 = 0.0; // 32 bit floating-point type
     let celsius: f32 = -16.0; // 32 bit floating-point type
-    let mut conversions: u32 = 0; // unsigned 32 bit integer; 0 - 4,294,967,295
-    println!("Freezing point (C): {FREEZING_POINT_C}");
-    println!("Freezing point as float (C): {FREEZING_POINT_AS_FLOAT_C}");
-    println!("Celsius input: {celsius}");
-
     let farenheit: f32 = celsius * 9.0 / 5.0 + 32.0;
-    let farenheit_as_integer: i32 = farenheit as i32; // type conversion from f32 to i32; lossy conversion
-    let is_below_freezing: bool = celsius < FREEZING_POINT_AS_FLOAT_C;
-    conversions += 1;
+    let mut count: u32 = 0; // unsigned 32 bit integer; 0 - 4,294,967,295
+    let is_below_freezing: bool = celsius < FREEZING_POINT_C;
+    let units: [char; 2] = ['C', 'F']; // fixed-size array containing two 'char' unit symbols
+    let conversion: (f32, f32) = (celsius, farenheit); // tuple contatining two 'f32'
 
-    println!("Farenheit output: {farenheit}");
-    println!("Farenheit output as integer: {farenheit_as_integer}");
-    println!("Below freezing: {is_below_freezing}");
-    println!("Conversions: {conversions}");
+    let status_label: &str = "Below freezing"; // a view of text stored somewhere else. It does not own that text and cannot grow it.
+    // String -> type to create
+    // :: -> select an operation belonging to that type
+    // from -> create a String from another value
+    // () -> the &str input
+    let title: String = String::from("Temperature converter"); // a value that owns its text storage. It can grow or change when used through a mutable variable.
+    let line: String = String::from("---------------------");
 
-    let input_unit: char = 'C';
-    let output_unit: char = 'F';
-    println!("Conversion: {celsius}°{input_unit} -> {farenheit}°{output_unit}");
+    count += 1;
+
+    println!("{line}");
+    println!("{title}");
+    println!("{line}");
+    println!(
+        "Tuple conversion: {}°{} -> {}°{}",
+        conversion.0, units[0], conversion.1, units[1]
+    );
+    println!("{}: {}", status_label, is_below_freezing);
+    println!("Conversion count: {}", count);
 }
