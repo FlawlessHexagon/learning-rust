@@ -3,7 +3,6 @@ fn main() {
 
     // use `while` when repetition depends on a changing Boolean condition.
     // use `for` when processing known values such as a range.
-
     for preparation_step in 1..4 {
         println!("Preparing game: step {preparation_step}");
     }
